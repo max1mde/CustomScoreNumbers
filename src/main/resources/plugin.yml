@@ -1,4 +1,5 @@
 name: CustomScoreNumbers
+description: = 'Customize the scoreboard sidebar numbers'
 version: '${version}'
 main: com.maximde.customscorenumbers.bukkit.CustomScoreNumbers
 api-version: '1.20'

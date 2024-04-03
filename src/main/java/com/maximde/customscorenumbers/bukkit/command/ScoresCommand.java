@@ -1,7 +1,11 @@
 package com.maximde.customscorenumbers.bukkit.command;
 
 import com.maximde.customscorenumbers.bukkit.CustomScoreNumbers;
-import org.bukkit.ChatColor;
+import com.maximde.customscorenumbers.shared.Commands;
+import com.maximde.customscorenumbers.shared.Constants;
+import com.maximde.customscorenumbers.shared.Message;
+import net.kyori.adventure.text.serializer.bungeecord.BungeeComponentSerializer;
+import net.md_5.bungee.api.chat.BaseComponent;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
@@ -17,7 +21,7 @@ public class ScoresCommand implements CommandExecutor {
     @Override
     public boolean onCommand(@NotNull CommandSender sender, @NotNull Command command, @NotNull String label, @NotNull String[] args) {
         if(!sender.hasPermission(customScoreNumbers.getScoresConfig().getPermission("commands"))) {
-            sender.sendMessage(ChatColor.RED + "No permission!");
+            sender.spigot().sendMessage(getMessage("<red>No permission!"));
             return false;
         }
         if(args.length != 1) {
@@ -26,7 +30,7 @@ public class ScoresCommand implements CommandExecutor {
         }
         if(args[0].equalsIgnoreCase("reload")) {
             customScoreNumbers.getScoresConfig().reload();
-            sender.sendMessage(ChatColor.GREEN + "Config reloaded!");
+            sender.spigot().sendMessage(getMessage("<green>Config reloaded!"));
             return false;
         }
         sendCommands(sender);
@@ -34,7 +38,14 @@ public class ScoresCommand implements CommandExecutor {
     }
 
     private void sendCommands(CommandSender sender) {
-        sender.sendMessage(ChatColor.RED + "Commands:\n" +
-                "- /customscores reload (Reload the config)");
+        sender.spigot().sendMessage(getMessage("<b>Commands</b>"));
+        for (Commands value : Commands.values()) {
+            sender.spigot().sendMessage(getMessage("<white>- /customscores "+value.name+" <gray>("+value.description+")"));
+        }
+        sender.spigot().sendMessage(getMessage("<b>Commands</b>"));
+    }
+
+    private BaseComponent[] getMessage(String message) {
+        return BungeeComponentSerializer.get().serialize(Constants.PREFIX.append(Message.get(message)));
     }
 }

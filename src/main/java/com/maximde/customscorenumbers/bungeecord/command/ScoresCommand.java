@@ -1,8 +1,12 @@
 package com.maximde.customscorenumbers.bungeecord.command;
 
 import com.maximde.customscorenumbers.bungeecord.CustomScoreNumbers;
-import net.md_5.bungee.api.ChatColor;
+import com.maximde.customscorenumbers.shared.Commands;
+import com.maximde.customscorenumbers.shared.Constants;
+import com.maximde.customscorenumbers.shared.Message;
+import net.kyori.adventure.text.serializer.bungeecord.BungeeComponentSerializer;
 import net.md_5.bungee.api.CommandSender;
+import net.md_5.bungee.api.chat.BaseComponent;
 import net.md_5.bungee.api.connection.ProxiedPlayer;
 import net.md_5.bungee.api.plugin.Command;
 import net.md_5.bungee.api.plugin.TabExecutor;
@@ -22,7 +26,7 @@ public class ScoresCommand extends Command implements TabExecutor {
     @Override
     public void execute(CommandSender sender, String[] args) {
         if(!sender.hasPermission(customScoreNumbers.getScoresConfig().getPermission("commands"))) {
-            sender.sendMessage(ChatColor.RED + "No permission!");
+            sender.sendMessage(getMessage("<red>No permission!"));
             return;
         }
         if(args.length != 1) {
@@ -31,7 +35,7 @@ public class ScoresCommand extends Command implements TabExecutor {
         }
         if(args[0].equalsIgnoreCase("reload")) {
             customScoreNumbers.getScoresConfig().reload();
-            sender.sendMessage(ChatColor.GREEN + "Config reloaded!");
+            sender.sendMessage(getMessage("<green>Config reloaded!"));
             return;
         }
         sendCommands(sender);
@@ -39,8 +43,11 @@ public class ScoresCommand extends Command implements TabExecutor {
     }
 
     private void sendCommands(CommandSender sender) {
-        sender.sendMessage(ChatColor.RED + "Commands:\n" +
-                "- /customscores reload (Reload the config)");
+        sender.sendMessage(getMessage("<b>Commands</b>"));
+        for (Commands value : Commands.values()) {
+            sender.sendMessage(getMessage("<white>- /customscores "+value.name+" <gray>("+value.description+")"));
+        }
+        sender.sendMessage(getMessage("<b>Commands</b>"));
     }
 
     @Override
@@ -53,5 +60,9 @@ public class ScoresCommand extends Command implements TabExecutor {
         List<String> completions = new ArrayList<>();
         if (args.length == 1) completions.add("reload");
         return completions;
+    }
+
+    private BaseComponent[] getMessage(String message) {
+        return BungeeComponentSerializer.get().serialize(Constants.PREFIX.append(Message.get(message)));
     }
 }

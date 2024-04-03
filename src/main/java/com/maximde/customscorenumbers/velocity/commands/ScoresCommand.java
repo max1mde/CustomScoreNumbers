@@ -1,0 +1,61 @@
+package com.maximde.customscorenumbers.velocity.commands;
+
+import com.maximde.customscorenumbers.shared.Commands;
+import com.maximde.customscorenumbers.shared.Constants;
+import com.maximde.customscorenumbers.shared.Message;
+import com.maximde.customscorenumbers.velocity.CustomScoreNumbers;
+import com.velocitypowered.api.command.CommandSource;
+import com.velocitypowered.api.command.SimpleCommand;
+import net.kyori.adventure.text.Component;
+
+import java.util.ArrayList;
+import java.util.List;
+
+public class ScoresCommand implements SimpleCommand {
+    private final CustomScoreNumbers customScoreNumbers;
+    public ScoresCommand(CustomScoreNumbers customScoreNumbers) {
+        this.customScoreNumbers = customScoreNumbers;
+    }
+
+    @Override
+    public void execute(Invocation invocation) {
+        CommandSource sender = invocation.source();
+        String[] args = invocation.arguments();
+        if(!sender.hasPermission(customScoreNumbers.getConfig().getPermission("commands"))) {
+            sender.sendMessage(getMessage("<red>No permission!"));
+            return;
+        }
+        if(args.length != 1) {
+            sendCommands(sender);
+            return;
+        }
+        if(args[0].equalsIgnoreCase("reload")) {
+            customScoreNumbers.getConfig().reload();
+            sender.sendMessage(getMessage("<green>Config reloaded!"));
+            return;
+        }
+        sendCommands(sender);
+    }
+
+    @Override
+    public List<String> suggest(Invocation invocation) {
+        List<String> completions = new ArrayList<>();
+        String[] args = invocation.arguments();
+        if (args.length == 0) {
+            completions.add("reload");
+        }
+        return completions;
+    }
+
+    private void sendCommands(CommandSource sender) {
+        sender.sendMessage(getMessage("<b>Commands</b>"));
+        for (Commands value : Commands.values()) {
+            sender.sendMessage(getMessage("<white>- /"+Constants.GLOBAL_COMMAND_NAME+" "+value.name+" <gray>("+value.description+")"));
+        }
+        sender.sendMessage(getMessage("<b>Commands</b>"));
+    }
+
+    private Component getMessage(String message) {
+        return Constants.PREFIX.append(Message.get(message));
+    }
+}
