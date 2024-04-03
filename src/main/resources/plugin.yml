@@ -1,8 +1,9 @@
 name: CustomScoreNumbers
 version: '${version}'
-main: com.maximde.customscorenumbers.CustomScoreNumbers
+main: com.maximde.customscorenumbers.bukkit.CustomScoreNumbers
 api-version: '1.20'
 author: MaximDe
+website: "https://www.spigotmc.org/resources/115955/"
 softdepend:
   - ProtocolLib
   - ProtocolSupport

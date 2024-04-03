@@ -4,7 +4,7 @@ plugins {
 }
 
 group = 'com.maximde'
-version = '1.0.0'
+version = '1.1.0'
 
 repositories {
     mavenCentral()
@@ -17,13 +17,17 @@ repositories {
         url = "https://oss.sonatype.org/content/groups/public/"
     }
     maven { url 'https://repo.codemc.io/repository/maven-releases/' }
+    maven { url 'https://jitpack.io' }
 }
 
 dependencies {
     compileOnly 'org.projectlombok:lombok:1.18.30'
     annotationProcessor 'org.projectlombok:lombok:1.18.30'
     compileOnly "org.spigotmc:spigot-api:1.20.4-R0.1-SNAPSHOT"
+    compileOnly "net.md-5:bungeecord-api:1.20-R0.1-SNAPSHOT"
     implementation 'com.github.retrooper.packetevents:spigot:2.2.1'
+    implementation 'com.github.retrooper.packetevents:bungeecord:2.2.1'
+    implementation 'com.github.Carleslc.Simple-YAML:Simple-Yaml:1.8.4'
 }
 
 def targetJavaVersion = 17

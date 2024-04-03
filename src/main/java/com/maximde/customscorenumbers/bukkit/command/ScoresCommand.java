@@ -1,6 +1,6 @@
-package com.maximde.customscorenumbers.command;
+package com.maximde.customscorenumbers.bukkit.command;
 
-import com.maximde.customscorenumbers.CustomScoreNumbers;
+import com.maximde.customscorenumbers.bukkit.CustomScoreNumbers;
 import org.bukkit.ChatColor;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;

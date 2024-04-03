@@ -1,0 +1,8 @@
+name: CustomScoreNumbers
+version: '1.1.0'
+main: com.maximde.customscorenumbers.bungeecord.CustomScoreNumbers
+author: MaximDe
+website: "https://www.spigotmc.org/resources/115955/"
+
+commands:
+  customscores:
