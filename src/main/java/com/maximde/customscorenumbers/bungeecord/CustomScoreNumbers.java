@@ -37,7 +37,7 @@ public final class CustomScoreNumbers extends Plugin {
         this.adventure = BungeeAudiences.create(this);
         this.scoresConfig = new Config();
         this.packetManager.load(scoresConfig);
-        new Metrics(this, 21490);
+        new Metrics(this, 21513);
         getProxy().getPluginManager().registerCommand(this, new ScoresCommand("customscores", this));
     }
 

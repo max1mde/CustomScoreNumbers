@@ -1,11 +1,14 @@
 package com.maximde.customscorenumbers.bukkit;
 
+
+
 import com.github.retrooper.packetevents.PacketEvents;
-import com.github.retrooper.packetevents.event.PacketListener;
 import com.maximde.customscorenumbers.bukkit.command.ScoresCommand;
 import com.maximde.customscorenumbers.bukkit.command.ScoresTabCompleter;
 import com.maximde.customscorenumbers.shared.Config;
 import com.maximde.customscorenumbers.shared.packet.PacketManager;
+
+
 import io.github.retrooper.packetevents.bstats.Metrics;
 import io.github.retrooper.packetevents.factory.spigot.SpigotPacketEventsBuilder;
 import lombok.Getter;
@@ -13,7 +16,7 @@ import lombok.NonNull;
 import net.kyori.adventure.platform.bukkit.BukkitAudiences;
 import org.bukkit.plugin.java.JavaPlugin;
 
-public final class CustomScoreNumbers extends JavaPlugin implements PacketListener {
+public final class CustomScoreNumbers extends JavaPlugin {
 
     @Getter
     private Config scoresConfig;

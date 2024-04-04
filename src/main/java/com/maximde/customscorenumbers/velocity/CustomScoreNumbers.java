@@ -12,6 +12,7 @@ import com.google.inject.Inject;
 import com.velocitypowered.api.event.Subscribe;
 import com.velocitypowered.api.event.proxy.ProxyInitializeEvent;
 import com.velocitypowered.api.plugin.PluginContainer;
+import com.velocitypowered.api.plugin.annotation.DataDirectory;
 import com.velocitypowered.api.proxy.ProxyServer;
 import io.github.retrooper.packetevents.velocity.factory.VelocityPacketEventsBuilder;
 import lombok.Getter;
@@ -20,9 +21,9 @@ import org.slf4j.Logger;
 import java.nio.file.Path;
 
 @Plugin(
-        id = "customscorenumbers",
+        id = "custmoscores",
         name = "CustomScoreNumbers",
-        version = Constants.VERSION,
+        version = "1.2.0",
         description = "Customize the scoreboard sidebar numbers",
         authors = {"MaximDe"}
 )
@@ -33,7 +34,7 @@ public class CustomScoreNumbers {
     private ProxyServer server;
     @Inject
     private PluginContainer pluginContainer;
-    @Inject
+    @Inject @DataDirectory
     private Path dataDirectory;
     @Getter
     private Config config;
@@ -42,7 +43,7 @@ public class CustomScoreNumbers {
 
     @Subscribe
     public void onProxyInitialization(ProxyInitializeEvent event) {
-        Metrics metrics = metricsFactory.make(this, 21490);
+        Metrics metrics = metricsFactory.make(this, 21514);
         this.config = new Config();
         PacketManager packetManager = new PacketManager(VelocityPacketEventsBuilder.build(server, pluginContainer, logger, dataDirectory));
         packetManager.load(config);
