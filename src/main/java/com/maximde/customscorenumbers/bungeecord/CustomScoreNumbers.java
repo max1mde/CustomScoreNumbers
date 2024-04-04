@@ -1,5 +1,6 @@
 package com.maximde.customscorenumbers.bungeecord;
 
+import com.github.retrooper.packetevents.PacketEvents;
 import com.maximde.customscorenumbers.bungeecord.command.ScoresCommand;
 import com.maximde.customscorenumbers.bungeecord.utils.Metrics;
 import com.maximde.customscorenumbers.shared.Config;
@@ -14,7 +15,6 @@ public final class CustomScoreNumbers extends Plugin {
 
     @Getter
     private Config scoresConfig;
-    private PacketManager packetManager;
 
     private BungeeAudiences adventure;
 
@@ -25,6 +25,11 @@ public final class CustomScoreNumbers extends Plugin {
         return this.adventure;
     }
 
+    private PacketManager packetManager;
+    @Override
+    public void onLoad() {
+        this.packetManager = new PacketManager(BungeePacketEventsBuilder.build(this));
+    }
 
     @Override
     public void onEnable() {
@@ -42,5 +47,6 @@ public final class CustomScoreNumbers extends Plugin {
             this.adventure.close();
             this.adventure = null;
         }
+        PacketEvents.getAPI().terminate();
     }
 }

@@ -11,15 +11,15 @@ public class PacketManager {
 
     public PacketManager(PacketEventsAPI<?> api) {
         PacketEvents.setAPI(api);
-        PacketEvents.getAPI().getSettings().reEncodeByDefault(false)
-                .checkForUpdates(false)
-                .bStats(false);
         PacketEvents.getAPI().load();
     }
 
     public void load(Config config) {
+        PacketEvents.getAPI().getSettings().reEncodeByDefault(false)
+                .checkForUpdates(false)
+                .bStats(false);
+        PacketEvents.getAPI().init();
         PacketEvents.getAPI().getEventManager().registerListener(new PacketSendListener(config),
                 PacketListenerPriority.LOW);
-        PacketEvents.getAPI().init();
     }
 }

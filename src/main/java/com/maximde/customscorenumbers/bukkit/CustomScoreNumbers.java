@@ -1,5 +1,6 @@
 package com.maximde.customscorenumbers.bukkit;
 
+import com.github.retrooper.packetevents.PacketEvents;
 import com.github.retrooper.packetevents.event.PacketListener;
 import com.maximde.customscorenumbers.bukkit.command.ScoresCommand;
 import com.maximde.customscorenumbers.bukkit.command.ScoresTabCompleter;
@@ -46,6 +47,7 @@ public final class CustomScoreNumbers extends JavaPlugin implements PacketListen
             this.adventure.close();
             this.adventure = null;
         }
+        PacketEvents.getAPI().terminate();
     }
 
 }
