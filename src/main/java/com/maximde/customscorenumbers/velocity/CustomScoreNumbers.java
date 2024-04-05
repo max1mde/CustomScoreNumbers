@@ -27,24 +27,27 @@ import java.nio.file.Path;
         description = "Customize the scoreboard sidebar numbers",
         authors = {"MaximDe"}
 )
+@Getter
 public class CustomScoreNumbers {
+    private final Logger logger;
+    private final ProxyServer server;
+    private final PluginContainer pluginContainer;
+    private final Path dataDirectory;
+    private final Metrics.Factory metricsFactory;
+    private final Config config;
     @Inject
-    private Logger logger;
-    @Inject @Getter
-    private ProxyServer server;
-    @Inject
-    private PluginContainer pluginContainer;
-    @Inject @DataDirectory
-    private Path dataDirectory;
-    @Getter
-    private Config config;
-    @Inject
-    private Metrics.Factory metricsFactory;
+    public CustomScoreNumbers(Logger logger, ProxyServer proxyServer, PluginContainer pluginContainer, @DataDirectory Path dataDirectory, Metrics.Factory metricsFactory) {
+        this.logger = logger;
+        this.server = proxyServer;
+        this.pluginContainer = pluginContainer;
+        this.dataDirectory = dataDirectory;
+        this.metricsFactory = metricsFactory;
+        this.config = new Config();
+    }
 
     @Subscribe
     public void onProxyInitialization(ProxyInitializeEvent event) {
         Metrics metrics = metricsFactory.make(this, 21514);
-        this.config = new Config();
         PacketManager packetManager = new PacketManager(VelocityPacketEventsBuilder.build(server, pluginContainer, logger, dataDirectory));
         packetManager.load(config);
         server.getCommandManager().register(Constants.GLOBAL_COMMAND_NAME, new ScoresCommand(this));
