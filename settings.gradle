@@ -1,1 +1,6 @@
 rootProject.name = 'NoRedScoreNumbers'
+include 'velocity'
+include 'core'
+include 'spigot'
+include 'bungeecord'
+
