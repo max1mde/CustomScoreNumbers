@@ -1,0 +1,39 @@
+import com.github.jengelman.gradle.plugins.shadow.tasks.ShadowJar
+
+plugins {
+    id 'java'
+    id 'com.github.johnrengelman.shadow' version '8.1.1'
+}
+
+group = 'com.maximde'
+version = '1.2.0'
+
+repositories {
+    mavenCentral()
+    maven { url 'https://repo.codemc.io/repository/maven-releases/' }
+    maven { url 'https://jitpack.io' }
+    maven {
+        name = "spigotmc-repo"
+        url = "https://hub.spigotmc.org/nexus/content/repositories/snapshots/"
+    }
+}
+
+dependencies {
+    implementation "net.kyori:adventure-platform-bungeecord:4.3.2"
+    implementation 'com.github.retrooper.packetevents:bungeecord:2.2.1'
+    compileOnly "net.md-5:bungeecord-api:1.20-R0.1-SNAPSHOT"
+    implementation(project(":core"))
+}
+
+processResources {
+    def props = [version: version]
+    inputs.properties props
+    filteringCharset 'UTF-8'
+    filesMatching('bungee.yml') {
+        expand props
+    }
+}
+
+shadowJar {
+    relocate("io.github.retrooper.packetevents", "io.github.retrooper.packetevents.bungeecord")
+}

@@ -1,0 +1,22 @@
+import com.github.jengelman.gradle.plugins.shadow.tasks.ShadowJar
+
+plugins {
+    id 'java'
+}
+
+group = 'com.maximde'
+version = '1.2.0'
+
+repositories {
+    mavenCentral()
+    maven { url 'https://repo.codemc.io/repository/maven-releases/' }
+    maven { url 'https://jitpack.io' }
+    maven { url 'https://repo.codemc.io/repository/maven-releases/' }
+}
+
+
+
+dependencies {
+    compileOnly 'com.github.retrooper.packetevents:velocity:2.2.1'
+    implementation 'com.github.Carleslc.Simple-YAML:Simple-Yaml:1.8.4'
+}
