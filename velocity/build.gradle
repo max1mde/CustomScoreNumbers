@@ -12,7 +12,7 @@ processResources {
 }
 
 shadowJar {
-    exclude '**/plugin.yml'
+    exclude('**/plugin.yml')
     from sourceSets.main.resources
     relocate 'io.github.retrooper.packetevents', 'io.github.retrooper.packetevents.velocity'
 }

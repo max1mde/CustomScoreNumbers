@@ -4,7 +4,7 @@ plugins {
 }
 
 group = 'com.maximde'
-version = '1.2.0'
+version = '1.2.1'
 
 def submoduleJars = []
 
@@ -39,6 +39,10 @@ subprojects { subproject ->
         options.release.set(17)
     }
 
+    shadowJar {
+        exclude("**/assets/mappings/")
+        exclude("**/META-INF/**")
+    }
 
     if (subproject.name != 'core') {
         def shadowJarTask = subproject.tasks.getByName('shadowJar')
@@ -50,7 +54,7 @@ subprojects { subproject ->
 tasks.register('crossPlatformJar', Jar) {
     dependsOn(subprojects.tasks.assemble)
     from(submoduleJars.collect { zipTree(it) })
-    duplicatesStrategy = DuplicatesStrategy.INCLUDE
+    duplicatesStrategy = DuplicatesStrategy.EXCLUDE
     archiveFileName.set("CustomScores-${version}.jar")
 }
 

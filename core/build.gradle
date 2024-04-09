@@ -5,6 +5,6 @@ dependencies {
 }
 
 shadowJar {
-    exclude '**/plugin.yml'
+    exclude ('**/plugin.yml')
     from sourceSets.main.resources
 }
