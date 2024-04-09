@@ -1,5 +1,3 @@
-import com.github.jengelman.gradle.plugins.shadow.tasks.ShadowJar
-
 plugins {
     id 'com.github.johnrengelman.shadow' version '8.1.1'
     id 'java'
@@ -8,43 +6,17 @@ plugins {
 group = 'com.maximde'
 version = '1.2.0'
 
-repositories {
-    mavenCentral()
-    maven { url 'https://repo.codemc.io/repository/maven-releases/' }
-    maven { url 'https://jitpack.io' }
-    maven {
-        name = "spigotmc-repo"
-        url = "https://hub.spigotmc.org/nexus/content/repositories/snapshots/"
-    }
-    maven {
-        name = "papermc-repo"
-        url = uri("https://repo.papermc.io/repository/maven-public/")
-    }
-    maven {
-        name = "sonatype"
-        url = "https://oss.sonatype.org/content/groups/public/"
-    }
-}
+def submoduleJars = []
 
-
-tasks.build {
-    finalizedBy(tasks.shadowJar)
-}
-
-subprojects {
+subprojects { subproject ->
     apply plugin: 'java'
-
-    tasks.jar {
-        archiveBaseName = "CustomScoreNumbers-" + project.name
-        archiveClassifier.set("")
-    }
+    apply plugin: 'com.github.johnrengelman.shadow'
 
     dependencies {
         compileOnly 'org.projectlombok:lombok:1.18.30'
         annotationProcessor 'org.projectlombok:lombok:1.18.30'
         implementation "net.kyori:adventure-text-minimessage:4.16.0"
     }
-
     repositories {
         mavenCentral()
         maven { url 'https://repo.codemc.io/repository/maven-releases/' }
@@ -58,7 +30,6 @@ subprojects {
             url = uri("https://repo.papermc.io/repository/maven-public/")
         }
     }
-
     java {
         toolchain.languageVersion.set(JavaLanguageVersion.of(17))
         disableAutoTargetJvm()
@@ -68,29 +39,21 @@ subprojects {
         options.release.set(17)
     }
 
-    afterEvaluate {
-        if (plugins.hasPlugin('com.github.johnrengelman.shadow')) {
-            tasks.build {
-                finalizedBy(tasks.shadowJar)
-            }
-        }
+
+    if (subproject.name != 'core') {
+        def shadowJarTask = subproject.tasks.getByName('shadowJar')
+        def submoduleJar = shadowJarTask.archiveFile.get()
+        submoduleJars.add(submoduleJar)
     }
 }
 
-dependencies {
-    implementation(project(":spigot"))
-    implementation(project(":velocity"))
-    implementation(project(":bungeecord"))
+tasks.register('crossPlatformJar', Jar) {
+    dependsOn(subprojects.tasks.assemble)
+    from(submoduleJars.collect { zipTree(it) })
+    duplicatesStrategy = DuplicatesStrategy.INCLUDE
+    archiveFileName.set("CustomScores-${version}.jar")
 }
 
-gradle.projectsEvaluated {
-    tasks.withType(ShadowJar).configureEach { shadowJarTask ->
-        if (shadowJarTask.name.contains('velocity')) {
-            shadowJarTask.relocate("io.github.retrooper.packetevents", "io.github.retrooper.packetevents.velocity")
-        } else if (shadowJarTask.name.contains('spigot')) {
-            shadowJarTask.relocate("io.github.retrooper.packetevents", "io.github.retrooper.packetevents.spigot")
-        } else if (shadowJarTask.name.contains('bungeecord')) {
-            shadowJarTask.relocate("io.github.retrooper.packetevents", "io.github.retrooper.packetevents.bungeecord")
-        }
-    }
+tasks.named('shadowJar').configure {
+    enabled = false
 }

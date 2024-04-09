@@ -1,9 +1,10 @@
-name: com.maximde.customscores.spigot.CustomScoreNumbers
+name: CustomScoreNumbers
 description: = 'Customize the scoreboard sidebar numbers'
 version: '${version}'
-main: com.maximde.customscorenumbers.bukkit.com.maximde.customscores.spigot.CustomScoreNumbers
+main: com.maximde.customscores.spigot.CustomScoreNumbers
 api-version: '1.20'
 author: MaximDe
+folia-supported: true
 website: "https://www.spigotmc.org/resources/115955/"
 softdepend:
   - ProtocolLib

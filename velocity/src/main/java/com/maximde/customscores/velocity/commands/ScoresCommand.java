@@ -32,7 +32,7 @@ public class ScoresCommand implements SimpleCommand {
         }
         if(args[0].equalsIgnoreCase("reload")) {
             customScoreNumbers.getConfig().reload();
-            sender.sendMessage(getMessage("<green>com.maximde.customscores.core.Config reloaded!"));
+            sender.sendMessage(getMessage("<green>Config reloaded!"));
             return;
         }
         sendCommands(sender);
@@ -49,11 +49,11 @@ public class ScoresCommand implements SimpleCommand {
     }
 
     private void sendCommands(CommandSource sender) {
-        sender.sendMessage(getMessage("<b>com.maximde.customscores.core.Commands</b>"));
+        sender.sendMessage(getMessage("<b>Commands</b>"));
         for (Commands value : Commands.values()) {
             sender.sendMessage(getMessage("<white>- /"+Constants.GLOBAL_COMMAND_NAME+" "+value.name+" <gray>("+value.description+")"));
         }
-        sender.sendMessage(getMessage("<b>com.maximde.customscores.core.Commands</b>"));
+        sender.sendMessage(getMessage("<b>Commands</b>"));
     }
 
     private Component getMessage(String message) {

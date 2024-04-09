@@ -26,7 +26,7 @@ public class ScoresCommand extends Command implements TabExecutor {
 
     @Override
     public void execute(CommandSender sender, String[] args) {
-        if(!sender.hasPermission(customScoreNumbers.getScoresConfig().getPermission("com.maximde.customscores.velocity.commands"))) {
+        if(!sender.hasPermission(customScoreNumbers.getScoresConfig().getPermission("commands"))) {
             sender.sendMessage(getMessage("<red>No permission!"));
             return;
         }
@@ -36,7 +36,7 @@ public class ScoresCommand extends Command implements TabExecutor {
         }
         if(args[0].equalsIgnoreCase("reload")) {
             customScoreNumbers.getScoresConfig().reload();
-            sender.sendMessage(getMessage("<green>com.maximde.customscores.core.Config reloaded!"));
+            sender.sendMessage(getMessage("<green>Config reloaded!"));
             return;
         }
         sendCommands(sender);
@@ -44,17 +44,17 @@ public class ScoresCommand extends Command implements TabExecutor {
     }
 
     private void sendCommands(CommandSender sender) {
-        sender.sendMessage(getMessage("<b>com.maximde.customscores.core.Commands</b>"));
+        sender.sendMessage(getMessage("<b>Commands</b>"));
         for (Commands value : Commands.values()) {
             sender.sendMessage(getMessage("<white>- /customscores "+value.name+" <gray>("+value.description+")"));
         }
-        sender.sendMessage(getMessage("<b>com.maximde.customscores.core.Commands</b>"));
+        sender.sendMessage(getMessage("<b>Commands</b>"));
     }
 
     @Override
     public Iterable<String> onTabComplete(CommandSender sender, String[] args) {
         if(sender instanceof ProxiedPlayer player) {
-            if(!player.hasPermission(customScoreNumbers.getScoresConfig().getPermission("com.maximde.customscores.velocity.commands"))) {
+            if(!player.hasPermission(customScoreNumbers.getScoresConfig().getPermission("commands"))) {
                 return new ArrayList<>();
             }
         }

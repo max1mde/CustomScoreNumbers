@@ -42,11 +42,11 @@ public final class CustomScoreNumbers extends JavaPlugin {
 
     @Override
     public void onDisable() {
+        PacketEvents.getAPI().terminate();
         if(this.adventure != null) {
             this.adventure.close();
             this.adventure = null;
         }
-        PacketEvents.getAPI().terminate();
     }
 
 }

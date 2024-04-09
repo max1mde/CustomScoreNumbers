@@ -21,7 +21,7 @@ public class ScoresCommand implements CommandExecutor {
 
     @Override
     public boolean onCommand(@NotNull CommandSender sender, @NotNull Command command, @NotNull String label, @NotNull String[] args) {
-        if(!sender.hasPermission(customScoreNumbers.getScoresConfig().getPermission("com.maximde.customscores.velocity.commands"))) {
+        if(!sender.hasPermission(customScoreNumbers.getScoresConfig().getPermission("commands"))) {
             sender.spigot().sendMessage(getMessage("<red>No permission!"));
             return false;
         }
@@ -31,7 +31,7 @@ public class ScoresCommand implements CommandExecutor {
         }
         if(args[0].equalsIgnoreCase("reload")) {
             customScoreNumbers.getScoresConfig().reload();
-            sender.spigot().sendMessage(getMessage("<green>com.maximde.customscores.core.Config reloaded!"));
+            sender.spigot().sendMessage(getMessage("<green>Config reloaded!"));
             return false;
         }
         sendCommands(sender);
@@ -39,11 +39,11 @@ public class ScoresCommand implements CommandExecutor {
     }
 
     private void sendCommands(CommandSender sender) {
-        sender.spigot().sendMessage(getMessage("<b>com.maximde.customscores.core.Commands</b>"));
+        sender.spigot().sendMessage(getMessage("<b>Commands</b>"));
         for (Commands value : Commands.values()) {
             sender.spigot().sendMessage(getMessage("<white>- /customscores "+value.name+" <gray>("+value.description+")"));
         }
-        sender.spigot().sendMessage(getMessage("<b>com.maximde.customscores.core.Commands</b>"));
+        sender.spigot().sendMessage(getMessage("<b>Commands</b>"));
     }
 
     private BaseComponent[] getMessage(String message) {

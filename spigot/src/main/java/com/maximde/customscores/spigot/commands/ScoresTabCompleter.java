@@ -21,7 +21,7 @@ public class ScoresTabCompleter implements TabCompleter {
     @Override
     public List<String> onTabComplete(@NotNull CommandSender sender, @NotNull Command command, @NotNull String label, @NotNull String[] args) {
         if(sender instanceof Player player) {
-            if(!player.hasPermission(customScoreNumbers.getScoresConfig().getPermission("com.maximde.customscores.velocity.commands"))) {
+            if(!player.hasPermission(customScoreNumbers.getScoresConfig().getPermission("commands"))) {
                 return new ArrayList<>();
             }
         }

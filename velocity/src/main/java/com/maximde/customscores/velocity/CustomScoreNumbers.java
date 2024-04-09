@@ -22,7 +22,7 @@ import java.nio.file.Path;
 
 @Plugin(
         id = "custmoscores",
-        name = "com.maximde.customscores.velocity.CustomScoreNumbers",
+        name = "CustomScoreNumbers",
         version = "1.2.0",
         description = "Customize the scoreboard sidebar numbers",
         authors = {"MaximDe"}
