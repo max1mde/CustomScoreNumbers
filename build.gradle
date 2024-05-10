@@ -42,7 +42,6 @@ subprojects { subproject ->
     }
 
     shadowJar {
-        exclude("**/assets/mappings/")
         exclude("**/META-INF/**")
     }
 
