@@ -1,0 +1,18 @@
+name: CustomScoreNumbers
+description: = 'Customize the scoreboard sidebar numbers'
+version: 'unspecified'
+main: com.maximde.customscores.spigot.CustomScoreNumbers
+api-version: '1.20'
+author: MaximDe
+folia-supported: true
+website: "https://www.spigotmc.org/resources/115955/"
+softdepend:
+  - ProtocolLib
+  - ProtocolSupport
+  - ViaVersion
+  - ViaBackwards
+  - ViaRewind
+  - Geyser-Spigot
+
+commands:
+  customscores:

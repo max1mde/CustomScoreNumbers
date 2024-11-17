@@ -1,0 +1,9 @@
+name: CustomScoreNumbers
+description: = 'Customize the scoreboard sidebar numbers'
+version: 'unspecified'
+main: com.maximde.customscores.bungeecord.CustomScoreNumbers
+author: MaximDe
+website: "https://www.spigotmc.org/resources/115955/"
+
+commands:
+  customscores:

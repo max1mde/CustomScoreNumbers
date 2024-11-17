@@ -17,7 +17,7 @@ public class PacketManager {
     public void load(Config config) {
         PacketEvents.getAPI().getSettings().reEncodeByDefault(false)
                 .checkForUpdates(false)
-                .bStats(false);
+                .bStats(true);
         PacketEvents.getAPI().getEventManager().registerListener(new PacketSendListener(config),
                 PacketListenerPriority.LOW);
         PacketEvents.getAPI().init();

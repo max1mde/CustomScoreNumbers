@@ -1,6 +1,6 @@
 dependencies {
     implementation "net.kyori:adventure-platform-bungeecord:4.3.2"
-    implementation 'com.github.retrooper.packetevents:bungeecord:2.3.0'
+    compileOnly 'com.github.retrooper:packetevents-bungeecord:2.6.0'
     compileOnly "net.md-5:bungeecord-api:1.20-R0.1-SNAPSHOT"
     implementation(project(":core"))
 }
@@ -17,5 +17,4 @@ processResources {
 shadowJar {
     exclude ('**/plugin.yml')
     from sourceSets.main.resources
-    relocate 'io.github.retrooper.packetevents', 'io.github.retrooper.packetevents.bungeecord'
 }

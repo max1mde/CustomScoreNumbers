@@ -2,7 +2,7 @@ dependencies {
     annotationProcessor 'com.velocitypowered:velocity-api:3.1.0'
     compileOnly("com.velocitypowered:velocity-api:3.2.0-SNAPSHOT")
     implementation(project(":core"))
-    implementation('com.github.retrooper.packetevents:velocity:2.3.0')
+    compileOnly('com.github.retrooper:packetevents-velocity:2.6.0')
 }
 
 processResources {
@@ -14,6 +14,5 @@ processResources {
 shadowJar {
     exclude('**/plugin.yml')
     from sourceSets.main.resources
-    relocate 'io.github.retrooper.packetevents', 'io.github.retrooper.packetevents.velocity'
 }
 

@@ -5,7 +5,7 @@ import com.maximde.customscores.core.Config;
 import com.maximde.customscores.core.packet.PacketManager;
 import com.maximde.customscores.spigot.commands.ScoresCommand;
 import com.maximde.customscores.spigot.commands.ScoresTabCompleter;
-import io.github.retrooper.packetevents.bstats.Metrics;
+import com.maximde.customscores.spigot.utils.Metrics;
 import io.github.retrooper.packetevents.factory.spigot.SpigotPacketEventsBuilder;
 import lombok.Getter;
 import lombok.NonNull;
