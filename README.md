@@ -3,15 +3,17 @@
 <img src="https://github.com/max1mde/CustomScoreNumbers/assets/114857048/d2fdb150-d7ac-4bf3-bfea-81ed62f146a0">
 </div>
 
+## Required
+- [packetevents](https://www.spigotmc.org/resources/80279/)
 
-# Config
+## Config
 ```
 ScoreNumbers:
   Invisible: true
   Color: "#04FFF9"
 ```
 
-# Commands
+## Commands
 ```
 /customscores reload (Reloads the config)
 ```
