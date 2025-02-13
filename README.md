@@ -7,6 +7,8 @@
 ## Required
 - [packetevents](https://www.spigotmc.org/resources/80279/)
 
+Only works with 1.20.3+ Servers & 1.20.3+ Clients
+
 ## Config
 ```
 ScoreNumbers:
